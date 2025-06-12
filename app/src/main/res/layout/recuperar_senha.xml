@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="24dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".EsqueceuSenha">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:srcCompat="@drawable/lar_da_regina" />
+        android:src="@drawable/lar_da_regina"/>
 
     <TextView
         android:text="Esqueceu sua senha?"
@@ -30,12 +31,14 @@
 
     <EditText
         android:hint="Email"
+        android:id="@+id/txtEsqEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"/>
 
     <EditText
         android:hint="Nova senha"
+        android:id="@+id/txtEsqSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -43,12 +46,14 @@
 
     <Button
         android:text="Reenviar código"
+        android:id="@+id/btReenviarCodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
+        android:id="@+id/btRedefineSenha"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="#FF8800"

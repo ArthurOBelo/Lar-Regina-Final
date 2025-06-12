@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText txtLogEmail, txtLogSenha;
-    Button btLogAcessar, btLogCadastre_se;
+    Button btLogAcessar, btLogCadastre_se ,btEsqueceuSenha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +29,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
         btLogAcessar = findViewById(R.id.btLogAcessar);
         btLogCadastre_se = findViewById(R.id.btLogCadastre_se);
         txtLogEmail = findViewById(R.id.txtLogEmail);
         txtLogSenha = findViewById(R.id.txtLogSenha);
+        btEsqueceuSenha = findViewById(R.id.btEsqueceuSenha);
 
 
         btLogAcessar.setOnClickListener(this);
         btLogCadastre_se.setOnClickListener(this);
+        btEsqueceuSenha.setOnClickListener(this);
+
+
     }
+
 
 
     @Override
@@ -52,18 +59,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Intent tela = new Intent(this, Cadastre_se.class);
             startActivity(tela);
         }
+        if (v.getId()==R.id.btEsqueceuSenha) {
+            Intent tela = new Intent(this, EsqueceuSenha.class);
+            startActivity(tela);
+        }
     }
-    public boolean validaLogin(){
+    public boolean validaLogin() {
         boolean retorno = true;
         String _email = txtLogEmail.getText().toString();
         String _senha = txtLogSenha.getText().toString();
-        String msg ="";
-        if (_email.isEmpty()){
+        String msg = "";
+        if (_email.isEmpty()) {
             msg = "O campo de E-mail deve ser preenchido!";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             retorno = false;
         }
-        if (_senha.isEmpty()){
+        if (_senha.isEmpty()) {
             msg = "O campo SENHA não foi preenchido!";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             retorno = false;
@@ -71,16 +82,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         BancoControllerUsuarios bd = new BancoControllerUsuarios(getBaseContext());
 
 
-        Cursor dados = bd.ConsultaDadosLogin(_email, _senha) ;
+        Cursor dados = bd.ConsultaDadosLogin(_email, _senha);
 
 
-        if(dados.moveToFirst()){
+        if (dados.moveToFirst()) {
             retorno = true;
-        }else{
+        } else {
             msg = "O E-mail / Senha não estão cadastrados no sistema, CADASTRE-SE";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             retorno = false;
         }
         return retorno;
     }
+
 }

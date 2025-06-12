@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         // Os marcadores de conflito do Git foram removidos.
         setContentView(R.layout.tela_login);
 
-        // Encontra a view principal pelo ID e aplica um listener para ajustar o padding
-        // de acordo com as barras do sistema (como a barra de status e de navegação).
     }
 }
 
