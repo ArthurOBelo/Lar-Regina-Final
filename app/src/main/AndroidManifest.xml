@@ -18,15 +18,18 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Cadastre_se"
-            android:exported="false" />
+
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".AdoteActivity" />
+        <activity android:name=".DoacaoActivity" />
+        <activity android:name=".FaleConoscoActivity" />
+        <activity android:name=".Cadastre_se" />
         <activity android:name=".EsqueceuSenha" />
-        <activity android:name=".DoacaoActivity"/>
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

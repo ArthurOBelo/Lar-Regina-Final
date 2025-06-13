@@ -12,24 +12,33 @@ public class AdoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.adocao);  // Make sure this matches your XML filename
+        setContentView(R.layout.adocao);
 
         bottomNavigationView = findViewById(R.id.BottomNavigationView);
+
+        // Define o item "Adote" como selecionado
+        bottomNavigationView.setSelectedItemId(R.id.navadote);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.navhome) {
-                startActivity(new Intent(AdoteActivity.this, HomeActivity.class));
+                startActivity(new Intent(this, HomeActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (id == R.id.navadote) {
-                // Already on Adote screen
+                // Já está na tela de Adoção
                 return true;
             } else if (id == R.id.navdoe) {
-                startActivity(new Intent(AdoteActivity.this, DoacaoActivity.class));
+                startActivity(new Intent(this, DoacaoActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (id == R.id.navfale) {
-                startActivity(new Intent(AdoteActivity.this, FaleConoscoActivity.class));
+                startActivity(new Intent(this, FaleConoscoActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             }
             return false;

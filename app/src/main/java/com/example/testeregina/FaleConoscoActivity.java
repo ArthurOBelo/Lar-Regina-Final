@@ -14,9 +14,12 @@ public class FaleConoscoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fale_conosco);
 
-        bottomNavigationView = findViewById(R.id.BottomNavigationView);
+        BottomNavigationView bottomNav = findViewById(R.id.BottomNavigationView);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        bottomNav.setSelectedItemId(R.id.navfale);
+
+
+        bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.navhome) {

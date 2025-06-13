@@ -7,47 +7,59 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class BancoController {
     private SQLiteDatabase db;
-    private CriaBanco banco;
+    private final CriaBanco banco;
 
-    public BancoController(Context context) {
+    public BancoController(Context context){
         banco = new CriaBanco(context);
     }
 
-
-    public String insereDados(String _nome, String _cpf, String _email, String _senha, String _telefone) {
+    // Método corrigido para aceitar todos os parâmetros do cadastro
+    public String insereDados(String nome, String email, String cpf, String telefone, String senha){
         ContentValues valores;
         long resultado;
+
         db = banco.getWritableDatabase();
-
         valores = new ContentValues();
-        valores.put("nome", _nome);
-        valores.put("email", _email);
-        valores.put("cpf", _cpf);
-        valores.put("telefone", _telefone);
-        valores.put("senha", _senha);
+        valores.put(CriaBanco.NOME, nome);
+        valores.put(CriaBanco.EMAIL, email);
+        valores.put(CriaBanco.CPF, cpf);
+        valores.put(CriaBanco.TELEFONE, telefone);
+        valores.put(CriaBanco.SENHA, senha);
 
-        resultado = db.insert("usuarios", null, valores);
+        resultado = db.insert(CriaBanco.TABELA, null, valores);
         db.close();
 
-        if (resultado == -1)
-            return "Erro ao cadastrar";
-        else
-            return "Cadastrado com Sucesso";
+        if (resultado == -1) {
+            return "Erro ao inserir registro";
+        } else {
+            return "Registro Inserido com sucesso";
+        }
     }
-    public Cursor ConsultaDadosLogin(String _email, String _senha){
-        Cursor cursor;
-        String[] campos = { "codigo","nome","cpf","email","senha"};
-        String where = "email = '" + _email + "' and senha = '" + _senha + "'";
+
+    // Este método já estava correto e usará as novas constantes de CriaBanco
+    public Cursor ConsultaDadosLogin(String email, String senha){
         db = banco.getReadableDatabase();
 
+        String[] projection = {
+                CriaBanco.CODIGO,
+                CriaBanco.NOME, // Adicionado para poder pegar o nome no login
+                CriaBanco.EMAIL,
+                CriaBanco.SENHA
+        };
 
-        // select * from usuarios where _email = 'digitado' and _senha = 'senha'
-        cursor = db.query("usuarios", campos, where, null, null, null,
-                null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        db.close();
+        String selection = CriaBanco.EMAIL + " = ? AND " + CriaBanco.SENHA + " = ?";
+        String[] selectionArgs = { email, senha };
+
+        Cursor cursor = db.query(
+                CriaBanco.TABELA,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
         return cursor;
     }
 }
