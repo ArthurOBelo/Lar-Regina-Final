@@ -2,46 +2,45 @@ package com.example.testeregina;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdoteActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    ImageButton buttonHome, buttonAdote, buttonDoe, buttonFale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adocao);
 
-        bottomNavigationView = findViewById(R.id.BottomNavigationView);
+        // Inicializar os botões da navegação
+        buttonHome = findViewById(R.id.button5);  // Home
+        buttonAdote = findViewById(R.id.button6); // Adote
+        buttonDoe = findViewById(R.id.button7);   // Doe
+        buttonFale = findViewById(R.id.button8);  // Fale
 
-        // Define o item "Adote" como selecionado
-        bottomNavigationView.setSelectedItemId(R.id.navadote);
+        // Configurar ações
+        buttonHome.setOnClickListener(v -> {
+            startActivity(new Intent(AdoteActivity.this, HomeActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
+        buttonAdote.setOnClickListener(v -> {
+            // Já está na tela de adoção
+        });
 
-            if (id == R.id.navhome) {
-                startActivity(new Intent(this, HomeActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.navadote) {
-                // Já está na tela de Adoção
-                return true;
-            } else if (id == R.id.navdoe) {
-                startActivity(new Intent(this, DoacaoActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.navfale) {
-                startActivity(new Intent(this, FaleConoscoActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            }
-            return false;
+        buttonDoe.setOnClickListener(v -> {
+            startActivity(new Intent(AdoteActivity.this, DoacaoActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
+
+        buttonFale.setOnClickListener(v -> {
+            startActivity(new Intent(AdoteActivity.this, FaleConoscoActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
         });
     }
 }

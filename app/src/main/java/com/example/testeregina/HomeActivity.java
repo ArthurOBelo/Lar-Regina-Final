@@ -2,54 +2,57 @@ package com.example.testeregina;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
+
+    ImageButton buttonHome, buttonAdote, buttonDoe, buttonFale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        // Recebe o nome do usuário da Intent que veio do Login
+        // Saudação
         Intent intent = getIntent();
         String nomeUsuario = intent.getStringExtra("NOME_USUARIO");
 
-        // Encontra o TextView no layout e define a saudação
         TextView textSaudacao = findViewById(R.id.text_saudacao);
         if (nomeUsuario != null && !nomeUsuario.isEmpty()) {
             textSaudacao.setText("Olá, " + nomeUsuario + "!");
         }
 
-        // Lógica da barra de navegação
-        BottomNavigationView bottomNav = findViewById(R.id.BottomNavigationView);
-        bottomNav.setSelectedItemId(R.id.navhome);
+        // Inicializar botões
+        buttonHome = findViewById(R.id.button5);      // Home
+        buttonAdote = findViewById(R.id.button6);      // Adote
+        buttonDoe = findViewById(R.id.button7);        // Doe
+        buttonFale = findViewById(R.id.button8);       // Fale Conosco
 
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
+        // Lógica dos botões
+        buttonHome.setOnClickListener(v -> {
+            // Já está na Home, então não faz nada
+        });
 
-            if (id == R.id.navhome) {
-                // Já está na Home, não faz nada
-                return true;
-            } else if (id == R.id.navadote) {
-                startActivity(new Intent(getApplicationContext(), AdoteActivity.class));
-                overridePendingTransition(0, 0); // Remove animação de transição
-                finish(); // Fecha a tela atual
-                return true;
-            } else if (id == R.id.navdoe) {
-                startActivity(new Intent(getApplicationContext(), DoacaoActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.navfale) {
-                startActivity(new Intent(getApplicationContext(), FaleConoscoActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            }
-            return false;
+        buttonAdote.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, AdoteActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
+
+        buttonDoe.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, DoacaoActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
+
+        buttonFale.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, FaleConoscoActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
         });
     }
 }

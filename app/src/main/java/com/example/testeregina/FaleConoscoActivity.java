@@ -2,40 +2,49 @@ package com.example.testeregina;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FaleConoscoActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private ImageButton buttonHome, buttonAdote, buttonDoe, buttonFale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fale_conosco);
 
-        BottomNavigationView bottomNav = findViewById(R.id.BottomNavigationView);
+        // Inicializa os botões de navegação
+        buttonHome = findViewById(R.id.button5);  // Home
+        buttonAdote = findViewById(R.id.button6); // Adote
+        buttonDoe = findViewById(R.id.button7);   // Doe
+        buttonFale = findViewById(R.id.button8);  // Fale Conosco
 
-        bottomNav.setSelectedItemId(R.id.navfale);
+        // Destaca o botão da tela atual
+        buttonFale.setAlpha(0.5f); // Opcional: suaviza o botão ativo
 
+        // Configura os cliques
+        buttonHome.setOnClickListener(v -> {
+            startActivity(new Intent(this, HomeActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
 
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
+        buttonAdote.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdoteActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
 
-            if (id == R.id.navhome) {
-                startActivity(new Intent(FaleConoscoActivity.this, HomeActivity.class));
-                return true;
-            } else if (id == R.id.navadote) {
-                startActivity(new Intent(FaleConoscoActivity.this, AdoteActivity.class));
-                return true;
-            } else if (id == R.id.navdoe) {
-                startActivity(new Intent(FaleConoscoActivity.this, DoacaoActivity.class));
-                return true;
-            } else if (id == R.id.navfale) {
-                // Já está na tela Fale Conosco
-                return true;
-            }
-            return false;
+        buttonDoe.setOnClickListener(v -> {
+            startActivity(new Intent(this, DoacaoActivity.class));
+            overridePendingTransition(0, 0);
+            finish();
+        });
+
+        buttonFale.setOnClickListener(v -> {
+            // Já está na tela atual
         });
     }
 }
