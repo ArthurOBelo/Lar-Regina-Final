@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             retorno = false;
         }
-        BancoControllerUsuarios bd = new BancoControllerUsuarios(getBaseContext());
+        BancoController bd = new BancoController(getBaseContext());
 
 
         Cursor dados = bd.ConsultaDadosLogin(_email, _senha);
@@ -87,6 +87,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         if (dados.moveToFirst()) {
             retorno = true;
+
         } else {
             msg = "O E-mail / Senha não estão cadastrados no sistema, CADASTRE-SE";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

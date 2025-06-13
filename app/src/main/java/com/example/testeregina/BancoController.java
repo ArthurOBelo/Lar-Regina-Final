@@ -14,17 +14,17 @@ public class BancoController {
     }
 
 
-    public String insereDados(String txtNome, String txtEmail, String txtCpf, String txtTelefone, String txtSenha) {
+    public String insereDados(String _nome, String _cpf, String _email, String _senha, String _telefone) {
         ContentValues valores;
         long resultado;
         db = banco.getWritableDatabase();
 
         valores = new ContentValues();
-        valores.put("nome", txtNome);
-        valores.put("email", txtEmail);
-        valores.put("cpf", txtCpf);
-        valores.put("telefone", txtTelefone);
-        valores.put("senha", txtSenha);
+        valores.put("nome", _nome);
+        valores.put("email", _email);
+        valores.put("cpf", _cpf);
+        valores.put("telefone", _telefone);
+        valores.put("senha", _senha);
 
         resultado = db.insert("usuarios", null, valores);
         db.close();
@@ -34,7 +34,20 @@ public class BancoController {
         else
             return "Cadastrado com Sucesso";
     }
+    public Cursor ConsultaDadosLogin(String _email, String _senha){
+        Cursor cursor;
+        String[] campos = { "codigo","nome","cpf","email","senha"};
+        String where = "email = '" + _email + "' and senha = '" + _senha + "'";
+        db = banco.getReadableDatabase();
 
 
-
+        // select * from usuarios where _email = 'digitado' and _senha = 'senha'
+        cursor = db.query("usuarios", campos, where, null, null, null,
+                null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        db.close();
+        return cursor;
+    }
 }

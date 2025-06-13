@@ -35,9 +35,9 @@ public class Cadastre_se extends AppCompatActivity implements View.OnClickListen
 
 
     @Override
-    public void onClick(View v) {
+    public  void onClick(View v) {
         String _nome  = txtCadNome.getText().toString();
-        String _cpf   = txtCadCPF.getText().toString();
+        String _cpf = txtCadCPF.getText().toString();
         String _email = txtCadEmail.getText().toString();
         String _senha = txtCadSenha.getText().toString();
         String _telefone = txtCadTelefone.getText().toString();
@@ -62,13 +62,21 @@ public class Cadastre_se extends AppCompatActivity implements View.OnClickListen
                         String resultado;
 
 
-                        resultado = bd.insereDados(_nome,_cpf,_email, _senha, _telefone);
+                        resultado = bd.insereDados(_nome, _email, _cpf, _telefone, _senha);
 
 
                         Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+                        limpar();
                     }
                 }
             }
         }
     }
-}
+    public void limpar(){
+        txtCadNome.setText("") ;
+        txtCadEmail.setText("");
+        txtCadCPF.setText("");
+        txtCadTelefone.setText("");
+        txtCadSenha.setText("");
+    }
+    }
